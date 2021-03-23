@@ -4,29 +4,26 @@ import solve_min_swaps
 
 class TestMinSwaps(unittest.TestCase):
     nums = list()
-    swaps = None
+    validResults = None
 
     @classmethod
     def setUpClass(self):
+        print("Enter your input file name: ")
+        fn = str(input())
+        file = open(fn, "r")
+        
+        print("Now enter your solution file name: ")
+        sln = str(input())
+        self.validResults = int(str(open(sln, "r").readline().strip()))
+        
+        print("Proceeding to read file and test...")
+        lines = file.readlines()
         self.nums = list()
-        self.swaps = 0
-        n = random.randint(4, 10)
-        for i in range(0, n):  # create nums
-            self.nums.append(i + 1)
-        i = 0
-        swapThese = list()
-        for j in range(0, n):
-                if random.randint(0, 99) > 45:
-                    swapThese.append(j+1)
-                    
-                if len(swapThese) == 2:
-                    l = swapThese.pop()
-                    r = swapThese.pop()
-                    self.nums[r-1] = l
-                    self.nums[l-1] = r
-                    self.swaps += 1
-        print(self.nums)
-        print("NUMS & SWAPS ->", n, self.swaps)
+        for line in lines:
+            for num in line.split():
+                self.nums.append(int(num))
+        file.close()
+        print("len(numberList), validSolution ->", len(self.nums), self.validResults)
 
     @classmethod
     def tearDownClass(self):
@@ -34,7 +31,7 @@ class TestMinSwaps(unittest.TestCase):
         self.swaps = None
 
     def test_correctness(self):
-        assert solve_min_swaps.minimumSwaps(self.nums) == self.swaps
+        assert solve_min_swaps.minimumSwaps(self.nums) == self.validResults
 
 if __name__ == "__main__":
     unittest.main()
