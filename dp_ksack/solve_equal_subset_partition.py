@@ -36,7 +36,7 @@ if __name__ == "__main__":
             nums.append(int(n))
         if sum % 2 == 0:
             targetVal = int(sum / 2)
-            print("Target  (must be even whole number)  -> ", targetVal)
+            print("Target  (must be whole number)  -> ", targetVal)
             memo = dict()
             sums = dict()
             j = 0
